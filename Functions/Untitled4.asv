@@ -1,0 +1,7 @@
+path  = 'C:\Users\jkent\OneDrive - Nexus365\4D Flow\Ludo Scans\LWS-049';
+contour_file_extension = '.cvi42wsx';
+fileList = dir(fullfile(path,['*',contour_file_extension]));
+
+            for contour_n = 1:size(fileList,1)
+            contour_list{contour_n} = fileList(contour_n).name;
+            end

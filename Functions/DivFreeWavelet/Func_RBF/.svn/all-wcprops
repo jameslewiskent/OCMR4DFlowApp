@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/lab/!svn/ver/2197/frankong/DivFreeWavelet/Func_RBF
+END
+getRBFker.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lab/!svn/ver/2089/frankong/DivFreeWavelet/Func_RBF/getRBFker.m
+END
+getRBFmat.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lab/!svn/ver/2089/frankong/DivFreeWavelet/Func_RBF/getRBFmat.m
+END
+RBFconv.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/lab/!svn/ver/2113/frankong/DivFreeWavelet/Func_RBF/RBFconv.m
+END
+rbfDenoise.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/lab/!svn/ver/2197/frankong/DivFreeWavelet/Func_RBF/rbfDenoise.m
+END

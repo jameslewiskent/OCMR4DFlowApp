@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/repos/ocmr/!svn/ver/2626/trunk/aaron/Matlab/Rodgers_dcm_read
+END
+dicomDataMerge.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/ocmr/!svn/ver/2405/trunk/aaron/Matlab/Rodgers_dcm_read/dicomDataMerge.m
+END
+GetLongPathName.mexw32
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/ocmr/!svn/ver/2321/trunk/aaron/Matlab/Rodgers_dcm_read/GetLongPathName.mexw32
+END
+processDicomDir.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/ocmr/!svn/ver/2626/trunk/aaron/Matlab/Rodgers_dcm_read/processDicomDir.m
+END
+progressbar.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/repos/ocmr/!svn/ver/2321/trunk/aaron/Matlab/Rodgers_dcm_read/progressbar.m
+END
+GetLongPathName.mexw64
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/ocmr/!svn/ver/2321/trunk/aaron/Matlab/Rodgers_dcm_read/GetLongPathName.mexw64
+END
+processDicomDirRecursive.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/repos/ocmr/!svn/ver/2321/trunk/aaron/Matlab/Rodgers_dcm_read/processDicomDirRecursive.m
+END
+dirHash.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/repos/ocmr/!svn/ver/2321/trunk/aaron/Matlab/Rodgers_dcm_read/dirHash.m
+END

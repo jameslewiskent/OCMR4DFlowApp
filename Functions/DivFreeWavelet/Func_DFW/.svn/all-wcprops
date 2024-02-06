@@ -1,0 +1,149 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/lab/!svn/ver/2366/frankong/DivFreeWavelet/Func_DFW
+END
+dfwavelet_thresh.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh.cpp
+END
+dfwavelet_thresh_SURE_spin.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/lab/!svn/ver/2198/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh_SURE_spin.m
+END
+dfwavelet_thresh_spin.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lab/!svn/ver/2198/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh_spin.m
+END
+mexMake.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/mexMake.m
+END
+wcTile.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/lab/!svn/ver/2115/frankong/DivFreeWavelet/Func_DFW/wcTile.m
+END
+dfsoft_thresh.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/dfsoft_thresh.cpp
+END
+dfwavelet_forward.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/dfwavelet_forward.cpp
+END
+dfwavelet_thresh_SURE_MAD_spin.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh_SURE_MAD_spin.cpp
+END
+dfwavelet_thresh_SURE.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lab/!svn/ver/2198/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh_SURE.m
+END
+dfSUREshrink.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/dfSUREshrink.cpp
+END
+dfwavelet_thresh.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/lab/!svn/ver/2198/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh.m
+END
+dfwavelet_inverse.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/dfwavelet_inverse.cpp
+END
+dfsoft_thresh.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lab/!svn/ver/2198/frankong/DivFreeWavelet/Func_DFW/dfsoft_thresh.m
+END
+dfwavelet_thresh_SURE_MAD.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh_SURE_MAD.cpp
+END
+dfwavelet_forward.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/lab/!svn/ver/2197/frankong/DivFreeWavelet/Func_DFW/dfwavelet_forward.m
+END
+dfwavelet_thresh_SURE_MAD_spin.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/lab/!svn/ver/2198/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh_SURE_MAD_spin.m
+END
+dfSUREshrink.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/lab/!svn/ver/2198/frankong/DivFreeWavelet/Func_DFW/dfSUREshrink.m
+END
+getMADsigma.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/getMADsigma.cpp
+END
+dfwavelet_thresh_SURE_spin.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh_SURE_spin.cpp
+END
+dfwavelet_inverse.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/lab/!svn/ver/2198/frankong/DivFreeWavelet/Func_DFW/dfwavelet_inverse.m
+END
+dfwavelet_thresh_SURE_MAD.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/lab/!svn/ver/2198/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh_SURE_MAD.m
+END
+dfwavelet_thresh_spin.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh_spin.cpp
+END
+dfwavelet_thresh_SURE.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/lab/!svn/ver/2200/frankong/DivFreeWavelet/Func_DFW/dfwavelet_thresh_SURE.cpp
+END
+getMADsigma.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/lab/!svn/ver/2198/frankong/DivFreeWavelet/Func_DFW/getMADsigma.m
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/ocmr/!svn/ver/2321/trunk/aaron/Matlab/Rodgers_dcm_read/dcm4che/dcm4che-2.0.24-bin/dcm4che-2.0.24/etc
+END
+txt2dcmsr.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/ocmr/!svn/ver/2321/trunk/aaron/Matlab/Rodgers_dcm_read/dcm4che/dcm4che-2.0.24-bin/dcm4che-2.0.24/etc/txt2dcmsr.cfg
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/ocmr/!svn/ver/2321/trunk/aaron/Matlab/Rodgers_dcm_read/dcm4che/dcm4che-2.0.24-bin/dcm4che-2.0.24/etc/log4j.properties
+END
+pdf2dcm.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/repos/ocmr/!svn/ver/2321/trunk/aaron/Matlab/Rodgers_dcm_read/dcm4che/dcm4che-2.0.24-bin/dcm4che-2.0.24/etc/pdf2dcm.cfg
+END
