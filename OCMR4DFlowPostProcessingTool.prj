@@ -1,0 +1,127 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration build-checksum="1151787068" file="C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool.prj" location="C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code" name="OCMR4DFlowPostProcessingTool" preferred-package-location="C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>OCMR4DFlowPostProcessingTool</param.appname>
+    <param.icon>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool_resources\icon.ico</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool_resources\icon_32.png</file>
+      <file>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool_resources\icon_16.png</file>
+    </param.icons>
+    <param.version>2.0</param.version>
+    <param.authnamewatermark>Jack J. Miller, James L. Kent, Marco Spartera, Antonio Stracquadanio, and Aaron T. Hess.</param.authnamewatermark>
+    <param.email>marco.spartera@cardiov.ox.ac.uk</param.email>
+    <param.company>University of Oxford</param.company>
+    <param.summary>Analyse 4D Flow data -- i.e. create a summary statistics file in an enclosing dicom directory and show relevant information.</param.summary>
+    <param.description />
+    <param.screenshot>${PROJECT_ROOT}\splash.png</param.screenshot>
+    <param.guid />
+    <param.installpath.string>\University of Oxford\OCMR4DFlowPostProcessingTool\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.native.matlab>false</param.native.matlab>
+    <param.checkbox>false</param.checkbox>
+    <param.example />
+    <param.help.text>Syntax 
+	  -? 
+	 
+ Input Arguments 
+	 -?  print help on how to use the application 
+	 input arguments</param.help.text>
+    <unset>
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.description />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.install.notes />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+      <param.native.matlab />
+      <param.checkbox />
+      <param.example />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\FourDFlowAnalysis.mlapp</file>
+    </fileset.main>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\foldericon.png</file>
+      <file>${PROJECT_ROOT}\FourDFlowAnalysis.mlapp</file>
+      <file>${PROJECT_ROOT}\Functions</file>
+      <file>${PROJECT_ROOT}\movieicon.png</file>
+      <file>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool.prj</file>
+      <file>${PROJECT_ROOT}\OCMRlogo.ico</file>
+      <file>${PROJECT_ROOT}\OCMRlogo.png</file>
+      <file>${PROJECT_ROOT}\saveicon.png</file>
+      <file>${PROJECT_ROOT}\splash.png</file>
+    </fileset.resources>
+    <fileset.package>
+      <file>C:\Users\jkent\Downloads\4DFlow_atria\4DFlow_atria\LICENCE.txt</file>
+      <file>C:\Users\jkent\OneDrive - Nexus365\4D Flow\Documents to add to distribution\UserGuideV2.0.docx</file>
+    </fileset.package>
+    <fileset.depfun />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_testing" name="readme.txt" optional="true">C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_testing" name="splash.png" optional="false">C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_testing" name="OCMR4DFlowPostProcessingTool.exe" optional="false">C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool\for_testing\OCMR4DFlowPostProcessingTool.exe</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2021a</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
