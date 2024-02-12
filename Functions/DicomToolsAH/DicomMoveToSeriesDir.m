@@ -2,6 +2,7 @@ function DicomMoveToSeriesDir(dir_in,app)
 % Aaron Hess
 % University of Oxford 2014
 % Move dicoms into folders named by their series name
+% JK updated to allow multiple studies
 progbar = uiprogressdlg(app.OCMR4DFlowPostProcessingToolUIFigure,'Title','Arranging Dicom folder structure');
 
 [dicomData] = processDicomDir(dir_in, '*'); % Do not do recursive!

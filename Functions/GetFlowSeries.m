@@ -5,7 +5,7 @@ function [app,ser_flow,dicomData] = GetFlowSeries(app)
 % Currently, this will only return the flow series for the scan on which the contouring was performed.
 % If more than one flow scan was performed in a study, then this will be
 % ignored, need to update code to fix this.
-% JK Nov 2022
+% JK Feb 2024
 d_path = app.directoryPath;
 progbar = uiprogressdlg(app.OCMR4DFlowPostProcessingToolUIFigure,'Title','Please Wait','Message','Extracting contours',"Indeterminate",'on'); pause(0.1)
 app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - Extracting CMR42 contours.'); pause(0.1); scroll(app.DialogBoxTextArea, 'bottom');
@@ -169,6 +169,9 @@ elseif any(ser_flow(1) == ser_flow(2:end))
 end
 app.serFlow = ser_flow;
 app.StudyNumber = Study_Number;
+app.DICOMStudyEditField.Value = Study_Number; % Show on UI
+app.DICOMStudyEditField.Editable = 'off'; % Prevent editing is automatically found
+
 close(progbar)
 end
 

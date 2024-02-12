@@ -48,10 +48,20 @@ function app = finddicoms(app)
             app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - Could not automatically find flow series IDs. Please enter these manually.'); pause(0.1); scroll(app.DialogBoxTextArea, 'bottom');
             error('Could not automatically find flow series IDs.')
         end
-        app.SeriesIDsEditField.Value = ['[',num2str(ser_flow(1)),',',num2str(ser_flow(2)),',',num2str(ser_flow(3)),',',num2str(ser_flow(4)),']']; % JK update string in preferences with the selected flow series
+      
+        Series_String = sprintf('%.0f,' , ser_flow);
+        Series_String = ['[',Series_String(1:end-1),']']; % strip final comma, encase in square brackets
+        app.SeriesIDsEditField.Value = Series_String; % JK update string in preferences with the selected flow series
+        
         app.ListBox.Items = {}; % JK clear the list of items in listbox when new path specified
         
-        IdentifyDicomSeries(app,dicomData);
+        if length(dicomData.study) > 1
+        app.DICOMStudyEditField.Limits = [1,length(dicomData.study)]; % Limit to number of studies
+        else
+        app.DICOMStudyEditField.Editable = 'off';    
+        end
+        
+        IdentifyDicomSeries(app,dicomData); % Update selection
         
         app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - Succesfully loaded dicoms. Ready for analysis.'); scroll(app.DialogBoxTextArea, 'bottom');pause(0.1)
     catch % else if failed
