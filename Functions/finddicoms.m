@@ -42,17 +42,15 @@ function app = finddicoms(app)
         
         try
             [app,ser_flow,dicomData] = GetFlowSeries(app); pause(0.1) % JK select a default flow series based on dicom series description / sequence
+            Series_String = sprintf('%.0f,' , ser_flow);
+            Series_String = ['[',Series_String(1:end-1),']']; % strip final comma, encase in square brackets
+            app.SeriesIDsEditField.Value = Series_String; % JK update string in preferences with the selected flow series
         catch
             dicomData = processDicomDirRecursive(app,app.directoryPath,'*'); % If above has failed dicomData doesn't exist
             ser_flow = app.SeriesIDsEditField.Value; % Use default values
             app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - Could not automatically find flow series IDs. Please enter these manually.'); pause(0.1); scroll(app.DialogBoxTextArea, 'bottom');
-            error('Could not automatically find flow series IDs.')
         end
-      
-        Series_String = sprintf('%.0f,' , ser_flow);
-        Series_String = ['[',Series_String(1:end-1),']']; % strip final comma, encase in square brackets
-        app.SeriesIDsEditField.Value = Series_String; % JK update string in preferences with the selected flow series
-        
+
         app.ListBox.Items = {}; % JK clear the list of items in listbox when new path specified
         
         if length(dicomData.study) > 1
@@ -63,7 +61,7 @@ function app = finddicoms(app)
         
         IdentifyDicomSeries(app,dicomData); % Update selection
         
-        app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - Succesfully loaded dicoms. Ready for analysis.'); scroll(app.DialogBoxTextArea, 'bottom');pause(0.1)
+        app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - Succesfully loaded dicoms.'); scroll(app.DialogBoxTextArea, 'bottom');pause(0.1)
     catch % else if failed
         uialert(app.OCMR4DFlowPostProcessingToolUIFigure,'An error occured and the dicoms could not be loaded.','An error occured','icon','error');
         app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - An error occured and the dicoms could not be loaded.'); pause(0.1); scroll(app.DialogBoxTextArea, 'bottom');

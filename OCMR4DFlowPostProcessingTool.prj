@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="1151787068" file="C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool.prj" location="C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code" name="OCMR4DFlowPostProcessingTool" preferred-package-location="C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="1151787068" file="C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowApp\OCMR4DFlowPostProcessingTool.prj" location="C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowApp" name="OCMR4DFlowPostProcessingTool" preferred-package-location="C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>OCMR4DFlowPostProcessingTool</param.appname>
     <param.icon>${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool_resources\icon.ico</param.icon>
     <param.icons>
@@ -99,9 +99,9 @@
     </fileset.package>
     <fileset.depfun />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_testing" name="readme.txt" optional="true">C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool\for_testing\readme.txt</file>
-      <file location="${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_testing" name="splash.png" optional="false">C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool\for_testing\splash.png</file>
-      <file location="${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_testing" name="OCMR4DFlowPostProcessingTool.exe" optional="false">C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowPostProcessingTool\for_testing\OCMR4DFlowPostProcessingTool.exe</file>
+      <file location="${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_testing" name="readme.txt" optional="true">C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowApp\OCMR4DFlowPostProcessingTool\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_testing" name="OCMR4DFlowPostProcessingTool.exe" optional="false">C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowApp\OCMR4DFlowPostProcessingTool\for_testing\OCMR4DFlowPostProcessingTool.exe</file>
+      <file location="${PROJECT_ROOT}\OCMR4DFlowPostProcessingTool\for_testing" name="splash.png" optional="false">C:\Users\jkent\OneDrive - Nexus365\4D Flow\4D_Flow_Code\OCMR4DFlowApp\OCMR4DFlowPostProcessingTool\for_testing\splash.png</file>
     </build-deliverables>
     <workflow />
     <matlab>

@@ -38,88 +38,81 @@ progbar = uiprogressdlg(app.OCMR4DFlowPostProcessingToolUIFigure,'Title','Please
 
 NStudies = size(dicomData.study,2); % Number of studies
 for study_index = 1:NStudies
-NSeries(1,study_index) = size(dicomData.study(study_index).series,2); % Number of series in each study
+    NSeries(1,study_index) = size(dicomData.study(study_index).series,2); % Number of series in each study
 end
 
-series_total = 1; series_index = 1; study_index = 1; Mag_flag = 0;
-% First find the magnitude series ID
-while Mag_flag ~= 1 && series_total <= sum(NSeries)
-    Dicominfo = dicominfo(dicomData.study(study_index).series(series_index).instance(1).Filename);
-    
-    % First check whether SequenceName field exists in dicom,
-    % otherwise will throw error
-    if isfield(Dicominfo,'SequenceName')
-        % Check for magnitude series
-        if contains(Dicominfo.SequenceName,{'fl3d1','pc3d1'}) && Mag_flag ~= 1
-            % Test contours were made on this magnitude image
-            for ninstance = 1:size(dicomData.study(study_index).series(series_index).instance,2)
-                SOPUIDs{ninstance} = dicomData.study(study_index).series(series_index).instance(ninstance).SOPInstanceUID;
-            end
-            for iImg = 1:length(contours)
-                is_match = strfind(SOPUIDs,contours(iImg).uid);
-                ind = find(~cellfun(@isempty,is_match), 1);
-            end
-            if ~isempty(ind)
-                ser_flow(1,1) = dicomData.study(study_index).series(series_index).SeriesNumber; Mag_flag = 1; % We found the magnitude series number, yay!
-                Study_Number = study_index;
-                
-                % JK this shouldn't be here...
-                % JK Calculate approximate sequence timing from
-                % dicom header, AFAiK there isn't a better way
-                % of doing this since the actual sequence
-                % time isn't stored in the header, so this is
-                % approximate not accounting for recon time
-                str1 = char(Dicominfo.SeriesTime); str2 = char(Dicominfo.AcquisitionTime);
-                dhr = (str2double(str1(1:2))-str2double(str2(1:2)));
-                dmin = (str2double(str1(3:4))-str2double(str2(3:4)));
-                dsec = (str2double(str1(5:6))-str2double(str2(5:6)));
-                mins = floor((dhr*3600 + dmin*60 + dsec)/60);
-                secs = (dhr*3600 + dmin*60 + dsec) - mins * 60;
-                app.total_seqtimemmss = [num2str(mins),':',num2str(secs)];
-                app.total_seqtimeseconds = num2str(mins*60 + secs);
-            end
-        end
+series_total = 1; series_index = 1; study_index = 1; Mag_flag = 0; Study_Number = 1; clear ind is_match SOPUIDs
+% First find the magnitude series ID 
+ while series_total <= sum(NSeries) && Mag_flag ~= 1
+    % Test contours were made on this magnitude image
+    for ninstance = 1:size(dicomData.study(study_index).series(series_index).instance,2)
+        SOPUIDs{ninstance} = dicomData.study(study_index).series(series_index).instance(ninstance).SOPInstanceUID;
+    end
+    for iImg = 1:length(contours)
+         is_match = strfind(SOPUIDs,contours(iImg).uid);
+         ind = find(~cellfun(@isempty,is_match), 1);
+    end
+    if ~isempty(ind)
+        ser_flow(1,1) = dicomData.study(study_index).series(series_index).SeriesNumber;
+        Mag_flag = 1; % We found the magnitude series number, yay!
+        Study_Number = study_index;
     end
     
     % Increment counters
     series_index = series_index + 1;
     series_total = series_total + 1; % not same as series index in case of multiple studies
     if series_index > NSeries(1,study_index)
-    study_index = study_index + 1; % increment study counter
-    series_index = 1; % reset series index counter
-    end 
+        study_index = study_index + 1; % increment study counter
+        series_index = 1; % reset series index counter
+    end
 end
 
 % Now we have found the magnitude dataset used for contouring, we will use
 % the same study (Study_Number) for the remaining phase datasets
-
-% Uh-Oh we still haven't found our magnitude dataset...
 if Mag_flag == 0
+    % Uh-Oh we still haven't found our magnitude dataset...
     app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - Warning! Could not automatically find the magnitude series ID.'); pause(0.1); scroll(app.DialogBoxTextArea, 'bottom');
-end
-
-Mag_Img_Sz = size(dicomread(dicomData.study(Study_Number).series(find([dicomData.study(Study_Number).series.SeriesNumber] == ser_flow(1,1))).instance(1).Filename));
-
-% Now find all potential corresponding phase series IDs
-Phase_counter = 1; series_index = 1; study_index = 1;  Potential_Phase_Series_Indices = 0;
-for series_total = 1:sum(NSeries)
+    Potential_Phase_Series_Indices= [];
+else
+    % Calculate approximate sequence duration
+    Dicominfo = dicominfo(dicomData.study(Study_Number).series(series_index-1).instance(1).Filename);
+    % JK Calculate approximate sequence timing from
+    % dicom header, AFAiK there isn't a better way
+    % of doing this since the actual sequence
+    % time isn't stored in the header, so this is
+    % approximate not accounting for recon time
+    str1 = char(Dicominfo.SeriesTime); str2 = char(Dicominfo.AcquisitionTime);
+    dhr = (str2double(str1(1:2))-str2double(str2(1:2)));
+    dmin = (str2double(str1(3:4))-str2double(str2(3:4)));
+    dsec = (str2double(str1(5:6))-str2double(str2(5:6)));
+    mins = floor((dhr*3600 + dmin*60 + dsec)/60);
+    secs = (dhr*3600 + dmin*60 + dsec) - mins * 60;
+    app.total_seqtimemmss = [num2str(mins),':',num2str(secs)];
+    app.total_seqtimeseconds = num2str(mins*60 + secs); 
     
-    Dicominfo = dicominfo(dicomData.study(study_index).series(series_index).instance(1).Filename);
-   
-    % First check whether SequenceName field exists in dicom, otherwise will throw error
-    if isfield(Dicominfo,'SequenceName')
-        % Phase series images must be the same size as magnitude images
-        Current_Img_Sz = size(dicomread(dicomData.study(study_index).series(series_index).instance(1).Filename));
-        if study_index == Study_Number && all(Current_Img_Sz == Mag_Img_Sz) && contains(Dicominfo.SeriesDescription,{'_P'}) && isfield(Dicominfo,'ImageType')&&((~isempty(strfind(Dicominfo.ImageType,'\P\'))) || strcmp(Dicominfo.ImageType(end-1:end),'\P'))
-            Potential_Phase_Series_Indices(1,Phase_counter) = series_index; Phase_counter = Phase_counter + 1;
+    Mag_Img_Sz = size(dicomread(dicomData.study(Study_Number).series(find([dicomData.study(Study_Number).series.SeriesNumber] == ser_flow(1,1))).instance(1).Filename));
+    
+    % Now find all potential corresponding phase series IDs
+    Phase_counter = 1; series_index = 1; study_index = 1;  Potential_Phase_Series_Indices = 0;
+    for series_total = 1:sum(NSeries)
+        
+        Dicominfo = dicominfo(dicomData.study(study_index).series(series_index).instance(1).Filename);
+        
+        % First check whether SequenceName field exists in dicom, otherwise will throw error
+        if isfield(Dicominfo,'SequenceName')
+            % Phase series images must be the same size as magnitude images
+            Current_Img_Sz = size(dicomread(dicomData.study(study_index).series(series_index).instance(1).Filename));
+            if study_index == Study_Number && all(Current_Img_Sz == Mag_Img_Sz) && contains(Dicominfo.SeriesDescription,{'_P'}) && isfield(Dicominfo,'ImageType')&&((~isempty(strfind(Dicominfo.ImageType,'\P\'))) || strcmp(Dicominfo.ImageType(end-1:end),'\P'))
+                Potential_Phase_Series_Indices(1,Phase_counter) = series_index; Phase_counter = Phase_counter + 1;
+            end
+        end
+        
+        series_index = series_index + 1;
+        if series_index > NSeries(1,study_index)
+            study_index = study_index + 1;     % increment study counter
+            series_index = 1; % reset series index counter
         end
     end
-    
-    series_index = series_index + 1;
-    if series_index > NSeries(1,study_index)
-    study_index = study_index + 1;     % increment study counter
-    series_index = 1; % reset series index counter
-    end 
 end
 
 % If there are only exactly 3 phase series indices, job done!
@@ -148,10 +141,9 @@ elseif size(Potential_Phase_Series_Indices,2) > 3
     end
 end
 
-
 % Check we found all the series indices, if any indices are still 0, we
 % have a problem!
-if ser_flow(1) == 0
+if ser_flow(1,1) == 0
     app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - WARNING: Failed to find a dicom series which corresponds to the supplied contour file!'); pause(0.1); scroll(app.DialogBoxTextArea, 'bottom');
     disp(['Warning: @',mfilename,': Failed to find a dicom series that corresponds to the supplied contour file.'])
     app.SeriesIDsEditField.FontColor = [1 0 0];
