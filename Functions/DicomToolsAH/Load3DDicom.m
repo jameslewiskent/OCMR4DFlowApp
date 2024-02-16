@@ -94,7 +94,6 @@ opt.shift_cycle = 0;
 % end
 
 info.size(1:2) = size(im2d_in);
-
 type = 'single';  % JK changed to single
 img_in = zeros([info.size(1:2) TOTAL_IMGS],type);  % read x phase x imgs x magPhs
 teList = [];

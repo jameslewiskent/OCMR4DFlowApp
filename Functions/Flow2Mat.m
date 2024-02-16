@@ -71,16 +71,7 @@ if(~exist(mat_file_raw,'file') || opts.force_reload)
     opt.round_trigger_time = -1;  % auto set to sequence repetition time to gather time frames
     
     [im3D, info] = Load3DDicom(fullfile(d_path,opts.dicom_dir),ser_flow,opt,app);
-    
-    if opts.CountoursonPhaseImage~=0
-        % JK added. Contours performed on phase image, replace
-        % magnitude info.uids with those from contoured phase image
-        % This is a bit of a WIP hack
-        ser_flow(1) = ser_flow(1) - 1;
-        [~, tempinfo] = Load3DDicom(fullfile(d_path,opts.dicom_dir),ser_flow,opt,app);
-        info.uids = tempinfo.uids;
-    end
-    
+
     % save to matfile
     save(mat_file_raw,'im3D','info','-v7.3');
 else
@@ -96,8 +87,20 @@ NTime = sz(time_dim);
 NEncode = sz(flow_dim);
 
 % convert to velocity
-ind = strfind(info.order.contrastsList{NEncode},'_v');
-venc  = sscanf(info.order.contrastsList{NEncode}(ind:end),'_v%d')/100; % m/s
+%ind = strfind(info.order.contrastsList{NEncode},'_v');
+%venc  = sscanf(info.order.contrastsList{NEncode}(ind:end),'_v%d')/100; % m/s
+
+% JK replaced above as it assumed phase was last in contrast array
+Venc_Str = extractAfter(string(info.order.contrastsList(contains(info.order.contrastsList,'_v'))),'_v');
+for n = 1:length(Venc_Str)
+venc(n)  = sscanf(Venc_Str(n),'%d')/100; % m/s
+end
+
+if ~all(venc == venc(1))
+    error('Not all vencs are the same!')
+else
+    venc = venc(1);
+end
 
 flow = squeeze(angle(im3D))*venc/pi;
 mag = squeeze(sum(abs(im3D),flow_dim));

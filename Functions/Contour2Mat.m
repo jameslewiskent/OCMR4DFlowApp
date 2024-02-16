@@ -50,18 +50,18 @@ function [out_data, out_name] = Contour2Mat(d_path,contour_file, infoNative, inf
     no_uid = cellfun(@isempty,infoNative.uids);
     infoNative.uids(no_uid) = {'empty'};
 
-    [contours, study_uid] = ExtractCMR42Contours(fullfile(d_path,contour_file));
+    [contours, ~] = ExtractCMR42Contours(fullfile(d_path,contour_file));
 
         % add label to this to allow multiple labels
         for iImg = 1:length(contours)
             for iCont = 1:length(contours(iImg).str)
-                [labels,ind] = UpdateList(labels,contours(iImg).str(iCont).Label);
+                [labels,~] = UpdateList(labels,contours(iImg).str(iCont).Label);
             end
         end
         if length(labels)>1
-            [iLabel,tf] = listdlg('ListString',labels,'PromptString','select which contour label to use', 'SelectionMode','single');
+            [iLabel,~] = listdlg('ListString',labels,'PromptString','select which contour label to use', 'SelectionMode','single');
         else
-            iLabel  =1;
+            iLabel  = 1;
         end
         [~,c_nameBase,~] = fileparts(contour_file);
 
@@ -80,7 +80,6 @@ function [out_data, out_name] = Contour2Mat(d_path,contour_file, infoNative, inf
             dcm_found = false;
 
             for iImg = 1:length(contours)
-
                 is_match = strfind(infoNative.uids,contours(iImg).uid);
                 ind = find(~cellfun(@isempty,is_match));
                 % create a label list too...
@@ -99,7 +98,7 @@ function [out_data, out_name] = Contour2Mat(d_path,contour_file, infoNative, inf
                         cont_vol(a,b,c,d,e,f,g) = areaToVol*polyarea(contours(iImg).str(iCont).Points(1,:),contours(iImg).str(iCont).Points(2,:));
 
 
-                        % convert each controur into 4D flow coordinates then create a mask
+                        % convert each contour into 4D flow coordinates then create a mask
                         pt = [contours(iImg).str(iCont).Points(2:-1:1,:)/4; repmat(a,[1,size(contours(iImg).str(iCont).Points,2)]); repmat(1,[1,size(contours(iImg).str(iCont).Points,2)])];
                         %ptFlow = cine2flow*pt;
                         BWNative(:,:,a,b,c,d,e,f,g) = roipoly(BWNative(:,:,1),pt(2,:),pt(1,:));
@@ -150,11 +149,11 @@ function [out_data, out_name] = Contour2Mat(d_path,contour_file, infoNative, inf
             end
             
             
-                        % create a flow mask from contours
+            % create a flow mask from contours
             BWMax = zeros(info_out.size(1:3));
             BWMin = zeros(info_out.size(1:3));
             
-            [X, Y, Z, T,C] = ind2sub(size(BWMin),1:numel(BWMin));
+            [X, Y, Z, T, C] = ind2sub(size(BWMin),1:numel(BWMin));
 
             % Tcine = T/phsCine2Flow;  %this streaches cine contours to fit flow
 %             Tcine = T;
