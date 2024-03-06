@@ -21,7 +21,7 @@ if ~isdeployed
     addpath(genpath([lib_dir,filesep,'Functions']));
 end
 
-% Clear listbox
+% Clear listbox of selected series IDs
 app.ListBox.Items = {};
 app.ListBox.ItemsData = {};
 

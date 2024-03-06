@@ -47,7 +47,8 @@ function app = finddicoms(app)
             app.SeriesIDsEditField.Value = Series_String; % JK update string in preferences with the selected flow series
         catch
             dicomData = processDicomDirRecursive(app,app.directoryPath,'*'); % If above has failed dicomData doesn't exist
-            ser_flow = app.SeriesIDsEditField.Value; % Use default values
+            app.serFlow = [0,0,0,0];
+            app.SeriesIDsEditField.Value = '[0,0,0,0]';
             app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - Could not automatically find flow series IDs. Please enter these manually.'); pause(0.1); scroll(app.DialogBoxTextArea, 'bottom');
         end
 

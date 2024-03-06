@@ -75,11 +75,11 @@ seriesID_ProtocolName = dicominfo(dicomData.study(Study_Number).series(Series_In
 n = 2;
 for series_index = 1:NSeries
     if isfield(dicominfo(dicomData.study(Study_Number).series(series_index).instance(1).Filename),'ProtocolName') % Check field exists
-    if strcmp(seriesID_ProtocolName,dicominfo(dicomData.study(Study_Number).series(series_index).instance(1).Filename).ProtocolName)
-        ser_flow(1,n) = dicominfo(dicomData.study(Study_Number).series(series_index).instance(1).Filename).SeriesNumber;
-        Series_Indices(1,n) = series_index;
-        n = n + 1;
-    end
+        if strcmp(seriesID_ProtocolName,dicominfo(dicomData.study(Study_Number).series(series_index).instance(1).Filename).ProtocolName)
+            ser_flow(1,n) = dicominfo(dicomData.study(Study_Number).series(series_index).instance(1).Filename).SeriesNumber;
+            Series_Indices(1,n) = series_index;
+            n = n + 1;
+        end
     end
 end
 
@@ -104,13 +104,36 @@ Is_Phase_Img(Remove_flag) = [];
 % If the contour series ID we originally found is a subset of the
 % remaining group and a magnitude image, use this and the three phases found
 if ~Is_Phase_Img(ser_flow == Contour_Series_ID_Found)
-    ser_flow(1,2:4) = ser_flow(Is_Phase_Img);
+    
+    if length(ser_flow(Is_Phase_Img)) > 3
+        % There are more than 3 phases to choose from still!
+        % For now, let's choose those with the closest series time to the magnitude series
+        app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - WARNING: Multiple potential phase series flow IDs found. Choosing based on nearest in time to magntiude flow series ID. Please double check the chosen series IDs.'); pause(0.1); scroll(app.DialogBoxTextArea, 'bottom');
+        disp(['Warning: @',mfilename,': Multiple potential phase series flow IDs found. Choosing based on nearest in time to magntiude flow series ID. Please double check the chosen series IDs.'])
+        app.SeriesIDsEditField.FontColor = [1 0.5 0];
+        
+        Potential_Phase_Series_Indices = Series_Indices(Is_Phase_Img);
+        
+        Mag_SeriesTime = str2double(dicomData.study(Study_Number).series(find([dicomData.study(Study_Number).series.SeriesNumber] == Contour_Series_ID_Found)).SeriesTime);
+        for Phase_n = 1:size(Potential_Phase_Series_Indices,2)
+            Time_Diff(1,Phase_n) = abs(str2double(dicomData.study(Study_Number).series(Potential_Phase_Series_Indices(1,Phase_n)).SeriesTime) - Mag_SeriesTime);
+        end
+        % Find three smallest indices
+        [~,min_index] = mink(Time_Diff,3,2);
+        Potential_Phase_Series_Indices = Potential_Phase_Series_Indices(1,sort(min_index));
+        for Phase_n = 1:3
+            ser_flow(1,Phase_n+1) = dicomData.study(Study_Number).series(Potential_Phase_Series_Indices(1,Phase_n)).SeriesNumber;
+        end
+        
+    else
+        ser_flow(1,2:4) = ser_flow(Is_Phase_Img);
+    end
     ser_flow(1,1) = Contour_Series_ID_Found;
-    ser_flow = ser_flow(1,1:4); % clear remaing from selection
+    ser_flow = ser_flow(1,1:4); % clear remaining from selection
 end
 
 for n = 1:length(Series_Indices)
-[mins(n),secs(n)] = CalcApproxSeqTime(dicomData,Study_Number,Series_Indices(n));
+    [mins(n),secs(n)] = CalcApproxSeqTime(dicomData,Study_Number,Series_Indices(n));
 end
 mins = round(mean(mins)); secs = round(mean(secs));
 app.total_seqtimemmss = [num2str(mins),':',num2str(secs)];
