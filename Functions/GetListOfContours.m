@@ -1,7 +1,7 @@
 function app = GetListOfContours(app, user_input)
-            % Find list of contours in selected directory
-            contour_file_extension = '.cvi42wsx';
-            list = dir(fullfile(app.directoryPath,['*',contour_file_extension]));
+            % Find list of contours in selected directory for two potential
+            % contour file types
+            list = [dir(fullfile(app.directoryPath,'*.cvi42wsx'));dir(fullfile(app.directoryPath,'*.cvi42ws'))];
             
             % No countours found, give error
             if isempty(list)

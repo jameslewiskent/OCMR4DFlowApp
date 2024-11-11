@@ -1,11 +1,15 @@
 function [app,ser_flow,dicomData] = GetFlowSeries(app)
-% Get list of flow series from dicom folder.
+% Get the list of flow series IDs from dicom folder.
 % All must have the same number of instances.
 % Currently, this will only return the flow series for the scan on which the contouring was performed.
 % JK updated Feb 2024
+
+% Update UI progress bar
 d_path = app.directoryPath;
 progbar = uiprogressdlg(app.OCMR4DFlowPostProcessingToolUIFigure,'Title','Please Wait','Message','Extracting contours',"Indeterminate",'on'); pause(0.1)
 app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - Extracting CMR42 contours.'); pause(0.1); scroll(app.DialogBoxTextArea, 'bottom');
+
+% Try to get the study and image UID which were used for contouring
 try
     [~, study_uid, ~, image_uid] = ExtractCMR42Contours(fullfile(d_path,app.ContourDropDown.Value)); % Find magnitude used for contouring
 catch
@@ -20,6 +24,7 @@ d_path = [d_path,filesep,DicomFolderNames{contains(DicomFolderNames,app.DefaultD
 
 ser_flow = zeros(1,4); % pre-allocate array
 
+% Read in DICOM data and update progress bar
 app.DialogBoxTextArea.Value{length(app.DialogBoxTextArea.Value)+1} = char(string(datetime('now','Format','HH:mm')) + ' - Reading in DICOM files.'); pause(0.1); scroll(app.DialogBoxTextArea, 'bottom');
 try
     dicomData = processDicomDirRecursive(app,d_path,'*');
@@ -93,6 +98,7 @@ for n = 1:length(Series_Indices)
     info = dicominfo(dicomData.study(Study_Number).series(Series_Indices(n)).instance(1).Filename);
     Is_Phase_Img(n) = ((~isempty(strfind(info.ImageType,'\P\'))) || strcmp(info.ImageType(end-1:end),'\P'));
 end
+
 % Remove those without most common size
 for n = 1:length(Series_Indices)
     Remove_flag(:,n) = size(dicomData.study(Study_Number).series(Series_Indices(n)).instance,2) ~= mode(Img_Sz);
@@ -118,6 +124,7 @@ if ~Is_Phase_Img(ser_flow == Contour_Series_ID_Found)
         for Phase_n = 1:size(Potential_Phase_Series_Indices,2)
             Time_Diff(1,Phase_n) = abs(str2double(dicomData.study(Study_Number).series(Potential_Phase_Series_Indices(1,Phase_n)).SeriesTime) - Mag_SeriesTime);
         end
+        
         % Find three smallest indices
         [~,min_index] = mink(Time_Diff,3,2);
         Potential_Phase_Series_Indices = Potential_Phase_Series_Indices(1,sort(min_index));
@@ -132,6 +139,7 @@ if ~Is_Phase_Img(ser_flow == Contour_Series_ID_Found)
     ser_flow = ser_flow(1,1:4); % clear remaining from selection
 end
 
+% Calculate the appproximate sequence time based on dicom information
 for n = 1:length(Series_Indices)
     [mins(n),secs(n)] = CalcApproxSeqTime(dicomData,Study_Number,Series_Indices(n));
 end
